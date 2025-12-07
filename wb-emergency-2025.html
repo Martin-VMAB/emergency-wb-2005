@@ -112,8 +112,8 @@ svg.append("rect")
 
 var tooltip = d3.select("div.wb-5w-emergency-tooltip");
 d3.queue()
-	.defer(d3.json, "data/wb-5w-emergency-worldmap.json")
-	.defer(d3.csv, "data/wb-5w-emergency-world-country-names.csv")
+	.defer(d3.json, "wb-5w-emergency-worldmap.json")
+	.defer(d3.csv, "wb-5w-emergency-world-country-names.csv")
 	.await(ready);
 function ready(error, world, names) {
 	if (error) throw error;
