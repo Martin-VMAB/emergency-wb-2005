@@ -1,0 +1,423 @@
+@charset "UTF-8";
+/* CSS Document */
+#wb-5w-emergency-container {
+	background-color:#FFFFFF;
+	box-sizing:border-box;
+	display:block;
+	float:left;
+	font-size: 15px;
+	font-weight: 400;
+	line-height: 1.3;
+	max-width:1170px;
+	padding:20px;
+	position:relative;
+	width:100%;
+}
+#wb-5w-emergency-container * {
+	box-sizing:border-box;
+}
+
+#wb-5w-emergency-container .wb-5w-emergency-hidden {
+	display: none;	
+}
+#wb-5w-emergency-container div.wb-5w-emergency-tooltip {
+	border:2px solid #000;
+	color: #000; 
+	background: #fff; 
+	box-shadow: 3px 3px 10px 0.4px #888; 
+	padding: 0; 
+	position: absolute;
+	width:210px;
+	z-index: 100;
+}
+#wb-5w-emergency-container div.wb-5w-emergency-tooltip.wb-5w-emergency-tooltip-afr {
+	border:2px solid #359D7F;
+	background: #BFE2D2;
+}
+#wb-5w-emergency-container div.wb-5w-emergency-tooltip.wb-5w-emergency-tooltip-eap {
+	border:2px solid #55B0E4;
+	background: #E5F3FB;
+}
+#wb-5w-emergency-container div.wb-5w-emergency-tooltip.wb-5w-emergency-tooltip-eca {
+	border:2px solid #5FAFB4;
+	background: #B0DEE5;
+}
+#wb-5w-emergency-container div.wb-5w-emergency-tooltip.wb-5w-emergency-tooltip-lac {
+	border:2px solid #7B84B3;
+	background: #D8DBEE; 
+}
+#wb-5w-emergency-container div.wb-5w-emergency-tooltip.wb-5w-emergency-tooltip-mena {
+	border:2px solid #89964C;
+	background: #E8EFC4; 
+}
+#wb-5w-emergency-container div.wb-5w-emergency-tooltip.wb-5w-emergency-tooltip-sar {
+	border:2px solid #4E6EB4;
+	background: #CAD3E8; 
+}
+#wb-5w-emergency-container div.wb-5w-emergency-tooltip h3 {
+	border-bottom: 2px solid #000;
+	color: #000; 
+	display: block;
+	font-family: "Open Sans", Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	font-weight: 800 !important;
+	line-height: 1.1;
+	margin: 0;
+	padding: 5px 15px;
+	text-transform: uppercase;
+	width: 100%;
+}
+#wb-5w-emergency-container div.wb-5w-emergency-tooltip.wb-5w-emergency-tooltip-afr h3 {
+	border-bottom:2px solid #359D7F;
+}
+#wb-5w-emergency-container div.wb-5w-emergency-tooltip.wb-5w-emergency-tooltip-eap h3 {
+	border-bottom:2px solid #55B0E4;
+}
+#wb-5w-emergency-container div.wb-5w-emergency-tooltip.wb-5w-emergency-tooltip-eca h3 {
+	border-bottom:2px solid #5FAFB4;
+}
+#wb-5w-emergency-container div.wb-5w-emergency-tooltip.wb-5w-emergency-tooltip-lac h3 {
+	border-bottom:2px solid #7B84B3;
+}
+#wb-5w-emergency-container div.wb-5w-emergency-tooltip.wb-5w-emergency-tooltip-mena h3 {
+	border-bottom:2px solid #89964C;
+}
+#wb-5w-emergency-container div.wb-5w-emergency-tooltip.wb-5w-emergency-tooltip-sar h3 {
+	border-bottom:2px solid #4E6EB4;
+}
+#wb-5w-emergency-container div.wb-5w-emergency-tooltip p {
+	display: block;
+	color: 000;
+	margin: 0;
+	padding: 5px 15px;
+	width: 100%;
+}
+#wb-5w-emergency-container div.wb-5w-emergency-tooltip ul {
+	display: block;
+	margin: 6px 6px;
+	padding: 0;
+	width: 100%;
+}
+#wb-5w-emergency-container div.wb-5w-emergency-tooltip ul li {
+	color: 000;
+	list-style:disc;
+	margin: 0px 15px 0px 25px;
+	padding: 0;
+}
+#wb-5w-emergency-container div.wb-5w-emergency-tooltip ul li::marker {
+	color: #000;
+}
+#wb-5w-emergency-container div.wb-5w-emergency-tooltip.wb-5w-emergency-tooltip-eap ul li::marker {
+	color: #359D7F;
+}
+#wb-5w-emergency-container div.wb-5w-emergency-tooltip.wb-5w-emergency-tooltip-eap ul li::marker {
+	color: #55B0E4;
+}
+#wb-5w-emergency-container div.wb-5w-emergency-tooltip.wb-5w-emergency-tooltip-eca ul li::marker {
+	color: #5FAFB4;
+}
+#wb-5w-emergency-container div.wb-5w-emergency-tooltip.wb-5w-emergency-tooltip-lac ul li::marker {
+	color: #7B84B3;
+}
+#wb-5w-emergency-container div.wb-5w-emergency-tooltip.wb-5w-emergency-tooltip-mena ul li::marker {
+	color: #89964C;
+}
+#wb-5w-emergency-container div.wb-5w-emergency-tooltip.wb-5w-emergency-tooltip-sar ul li::marker {
+	color: #4E6EB4;
+}
+#wb-5w-emergency-container div.wb-5w-emergency-tooltip p a,
+#wb-5w-emergency-container div.wb-5w-emergency-tooltip ul li a {
+	color: #009BDF;
+	margin: 0;
+	padding: 0;
+	text-decoration: underline;
+}
+#wb-5w-emergency-container div.wb-5w-emergency-tooltip p a:hover,
+#wb-5w-emergency-container div.wb-5w-emergency-tooltip ul li a:hover {
+	color: #1678A6;
+	text-decoration: underline;
+}
+#wb-5w-emergency-container .wb-5w-emergency-background {
+	fill:none;
+	pointer-events: all;
+}
+
+#wb-5w-emergency-container h2 {
+	color: #67A1C3; 
+	display: block;
+	font-family: "Open Sans", Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	font-style: italic;
+	font-weight: 800 !important;
+	line-height: 1.1;
+	margin: 5px 0;
+	padding: 5px 0px;
+}
+#wb-5w-emergency-container .wb-5w-emergency-map-container {
+    display: block;
+	float:left;
+	height: 590px;
+    padding-bottom:0;
+    overflow: visible;
+	position: relative;
+    vertical-align: top;
+	width: 100%;
+	z-index: 1;
+}
+svg#wb-5w-emergency-map {
+    width: 100%;
+    height: 100%;
+    background-color: #FFF;
+}
+
+#wb-5w-emergency-container .wb-5w-emergency-map-container path:hover,
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle:hover {}
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle {
+	display: none;
+}
+
+/*#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="AL"],*/ /* Albania */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="AG"], /* Antigua and Barbuda */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="AO"], /* Angola */
+/*#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="BA"],*/ /* Bosnia and Herzegovina */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="BD"], /* Bangladesh */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="BF"], /* Burkina Faso */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="BT"], /* Bhutan */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="BZ"], /* Belize */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="CD"], /* Democratic Republic of the Congo */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="CF"], /* Central African Republic */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="CG"], /* Republic of Congo */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="CM"], /* Cameroon */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="CV"], /* Cabo Verde */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="DM"], /* Dominica */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="FM"], /* Federated States of Micronesia */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="GD"], /* Grenada */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="GN"], /* Guinea */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="GW"], /* Guinea Bissau */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="JO"], /* Jordan */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="KG"], /* Kyrgyzstan */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="KH"], /* Cambodia */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="KM"], /* Comoros */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="KN"], /* Saint Kitts and Nevis */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="HT"], /* Haiti */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="ID"], /* Indonesia */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="LA"], /* Lao People's Democratic Republic */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="LC"], /* Saint Lucia */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="LR"], /* Liberia */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="ME"], /* Montenegro - Western Balkans */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="MG"], /* Madagascar */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="ML"], /* Mali */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="MR"], /* Mauritania */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="MV"], /* Maldives */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="MW"], /* Malawi */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="NE"], /* Niger */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="NG"], /* Nigeria */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="NP"], /* Nepal */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="PH"], /* Philippines */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="PK"], /* Pakistan */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="RO"], /* Romania */
+/*#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="RS"],*/ /* Serbia */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="SC"], /* Seychelles */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="SL"], /* Sierra Leone */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="SO"], /* Somalia */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="SR"], /* Suriname */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="SS"], /* South Sudan */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="TD"], /* Chad */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="TJ"], /* Tajikistan */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="TV"], /* Tuvalu */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="TZ"], /* Tanzania */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="UG"], /* Uganda */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="VC"], /* Saint Vincent and the Grenadines */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="VN"], /* Vietnam */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="ZA"], /* South Africa */
+#wb-5w-emergency-container .wb-5w-emergency-map-container circle[data-country="ZM"]{ /* Zambia */
+	cursor: pointer;
+	display: block;
+}
+#wb-5w-emergency-container .wb-5w-emergency-map-container .wb-5w-emergency-map-tooltip {
+	display:none;	
+}
+#wb-5w-emergency-container .wb-5w-emergency-map-container .wb-5w-emergency-map-tooltip.wb-5w-emergency-map-tooltip-CV {
+	display:block;
+}
+#wb-5w-emergency-container .wb-5w-emergency-map-container .wb-5w-emergency-map-tooltip.wb-5w-emergency-map-tooltip-CV text {
+	color:#000;
+}
+
+/*** AFRICA (AFR) ***/
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="AO"], /* Angola */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="BF"], /* Burkina Faso */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="BI"], /* Burundi */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="BJ"], /* Benin */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="BW"], /* Botswana */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="CD"], /* Congo (Democratic Republic of the) */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="CF"], /* Central African Republic */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="CG"], /* Republic of Congo */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="CI"], /* Ivory Coast */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="CM"], /* Cameroon */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="CV"], /* Cabo Verde */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="ER"], /* Eritrea */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="ET"], /* Ethiopia */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="GA"], /* Gabon */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="GH"], /* Ghana */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="GM"], /* Gambia */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="GN"], /* Guinea */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="GW"], /* Guinea-Bissau */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="KE"], /* Kenya */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="KM"], /* Comoros */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="LR"], /* Liberia */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="LS"], /* Lesotho */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="MG"], /* Madagascar */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="ML"], /* Mali */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="MW"], /* Malawi */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="MR"], /* Mauritania */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="MU"], /* Mauritius */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="MZ"], /* Mozambique */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="NA"], /* Namibia */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="NE"], /* Niger */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="NG"], /* Nigeria */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="RW"], /* Rwanda */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="SC"], /* Seychelles */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="SD"], /* Sudan */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="SL"], /* Sierra Leone */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="SN"], /* Senegal */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="SO"], /* Somalia */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="SS"], /* South Sudan */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="ST"], /* Sao Tome and Principe */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="SZ"], /* Swaziland (Eswatini) */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="TD"], /* Chad */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="TG"], /* Togo */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="TZ"], /* Tanzania, United Republic of */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="UG"], /* Uganda */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="ZA"], /* South Africa */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="ZM"], /* Zambia */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="ZW"]{ /* Zimbabwe */
+	fill: #80C5A5;
+}
+/*** EAST ASIA AND PACIFIC (EAP) ***/
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="KH"], /* Cambodia */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="CN"], /* China */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="CK"], /* Cook Islands */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="FJ"], /* Fiji */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="FM"], /* Micronesia (Federated States of) */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="ID"], /* Indonesia */
+/* #wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="JP"], */ /* Japan */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="KI"], /* Kiribati */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="LA"], /* Lao People's Democratic Republic */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="MH"], /* Marshall Islands */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="MM"], /* Myanmar */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="MN"], /* Mongolia */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="NC"], /* New Caledonia */
+/* #wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="NZ"], */ /* New Zealand */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="PG"], /* Papua New Guinea */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="PH"], /* Philippines */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="PW"], /* Palau */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="SB"], /* Solomon Islands */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="TH"], /* Thailand */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="TL"], /* Timor-Leste */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="TO"], /* Tonga */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="TV"], /* Tuvalu */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="VN"], /* Vietnam */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="VU"], /* Vanuatu */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="WS"]{ /* Samoa */
+	fill: #55B0E4;
+}
+/*** EUROPE AND CENTRAL ASIA (ECA) ***/
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="AL"], /* Albania */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="AM"], /* Armenia */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="AZ"], /* Azerbaijan */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="BA"], /* Bosnia and Herzegovina */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="BG"], /* Bulgaria */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="BY"], /* Belarus */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="AZ"], /* Azerbaijan */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="CY"], /* Cyprus */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="CZ"], /* Czech Republic */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="EE"], /* Estonia */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="GE"], /* Georgia */
+/* #wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="GR"], */ /* Greece */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="HR"], /* Croatia */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="HU"], /* Hungary */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="KG"], /* Kyrgyzstan */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="KZ"], /* Kazakhstan */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="LT"], /* Lithuania */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="LV"], /* Latvia */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="MD"], /* Moldova */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="ME"], /* Montenegro */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="MK"], /* Macedonia */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="PL"], /* Poland */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="RO"], /* Romania */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="RS"], /* Serbia */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="RU"], /* Russian Federation */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="SI"], /* Slovenia */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="SK"], /* Slovakia */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="TJ"], /* Tajikistan */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="TM"], /* Turkmenistan */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="TR"], /* Turkey */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="UA"], /* Ukraine */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="UZ"]{ /* Uzbekistan */
+	fill: #96D3DD;
+}
+/*** LATIN AMERICA AND CARIBBEAN (LAC) ***/
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="AG"], /* Antigua and Barbuda */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="AR"], /* Argentina */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="BB"], /* Barbados */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="BS"], /* Bahamas */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="BO"], /* Bolivia (Plurinational State of) */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="BR"], /* Brazil */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="BZ"], /* Belize */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="CL"], /* Chile */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="CO"], /* Colombia */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="CR"], /* Costa Rica */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="DM"], /* Dominica */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="DO"], /* Dominican Republic */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="EC"], /* Ecuador */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="GD"], /* Grenada */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="GT"], /* Guatemala */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="GY"], /* Guyana */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="HT"], /* Haiti */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="HN"], /* Honduras */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="JM"], /* Jamaica */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="KN"], /* Saint Kitts and Nevis */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="LC"], /* Saint Lucia */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="MX"], /* Mexico */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="NI"], /* Nicaragua */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="PA"], /* Panama */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="PE"], /* Peru */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="PY"], /* Paraguay */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="SR"], /* Suriname */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="SV"], /* El Salvador */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="TT"], /* Trinidad and Tobago */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="UY"], /* Uruguay */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="VC"], /* Saint Vincent and the Grenadines */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="VE"]{ /* Venezuela (Bolivarian Republic of) */
+	fill:#B1B8DE;
+}
+/*** MIDDLE EAST AND NORTH AFRICA (MENA) ***/
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="AE"],
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="DJ"], /* Djibouti */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="DZ"], /* Algeria */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="EG"], /* Egypt */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="IQ"], /* Iraq */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="IR"], /* Iran */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="JO"], /* Jordan */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="LB"], /* Lebanon */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="LY"], /* Libya */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="MA"], /* Morocco */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="OM"], /* Oman */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="SA"], /* Saudi Arabia */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="SY"], /* Syria */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="TN"], /* Tunisia */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="YE"] { /* Yemen */
+	fill:#C6D76B;
+}
+/*** SOUTH ASIA (SAR) ***/
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="AF"], /* Afghanistan */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="BD"], /* Bangladesh */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="BT"], /* Bhutan */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="IN"], /* India */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="LK"], /* Sri Lanka */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="MV"], /* Maldives */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="NP"], /* Nepal */
+#wb-5w-emergency-container .wb-5w-emergency-map-container path[data-country="PK"]{ /* Pakistan */
+	fill: #4E6EB4;
+}
