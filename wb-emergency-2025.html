@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	
+	<!-- These lines already in your website-->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />	
+	<link rel="stylesheet" media="all" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+	<link rel="stylesheet" media="all" href="https://cdn.jsdelivr.net/npm/@unicorn-fail/drupal-bootstrap-styles@0.0.2/dist/3.4.0/8.x-3.x/drupal-bootstrap.min.css" integrity="sha512-tGFFYdzcicBwsd5EPO92iUIytu9UkQR3tLMbORL9sfi/WswiHkA1O3ri9yHW+5dXk18Rd+pluMeDBrPKSwNCvw==" crossorigin="anonymous" />
+	<style>
+		@import url("https://fonts.googleapis.com/css?family=Alegreya");
+		@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+	</style>
+	<!-- End of these lines already in your website-->	
+	
+	<link rel="stylesheet" type="text/css" href="css/wb-5w-emergency-2025.css" media="all" />
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+	<script src="https://d3js.org/topojson.v2.min.js"></script>
+	<script src="https://d3js.org/d3-queue.v3.min.js"></script>
+</head>
+
+
+
+<body>
+	<div id="wb-5w-emergency-container">
+		<div class="wb-5w-emergency-tooltip wb-5w-emergency-hidden"></div>
+		<h2>Click on the circles to show information about the Emergency Preparedness and Response for each country</h2>
+		<div class="wb-5w-emergency-map-container"></div>
+	</div>
+<script>
+
+var countryAG ="<h3>Antigua and Barbuda</h3><ul><li>R2R Diagnostic</li></ul>";
+var countryAO ="<h3>Angola</h3><ul><li>CPGA</li></ul><ul><li>Rapid Preparedness Assessment</li></ul>";
+var countryBD ="<h3>Bangladesh</h3><ul><li>R2R Diagnostic</li></ul><ul><li>Video - <a href='https://www.youtube.com/watch?v=HKwe5Ia6_so&list=PLlxZ8h0dxpsBXKnXZ9Kxe-YFF3tw7IH_H' title='Video - South Asia Emergency Operation Center Workshop' target='_blank'>South Asia Emergency Operation Center Workshop</a></li></ul>";
+var countryBF ="<h3>Burkina Faso</h3><ul><li>Rapid Preparedness Assessment</li></ul>";
+var countryBT ="<h3>Bhutan</h3><ul><li><a href='https://www.gfdrr.org/sites/default/files/2025-09/Bhutan-CPGA-Briefing-Note.pdf' title='CPGA' target='_blank'>CPGA</a></li></ul>";
+var countryBZ ="<h3>Belize</h3><ul><li>R2R Diagnostic</li></ul><ul><li>CPGA</li></ul>";
+var countryCD ="<h3>Democratic Republic of the Congo</h3><ul><li>Rapid Preparedness Assessment</li></ul>";
+var countryCF ="<h3>Central African Republic</h3><ul><li>CPGA</li></ul>";
+var countryCG ="<h3>Republic of Congo</h3><ul><li>Rapid Preparedness Assessment</li></ul>";
+var countryCM ="<h3>Cameroon</h3><ul><li>LLE</li></ul><ul><li>CPGA</li></ul>";
+var countryCV ="<h3>Cabo Verde</h3><ul><li>R2R Diagnostic (published <a href='https://www.gfdrr.org/sites/default/files/publication/R2R%20Diagnostic%20Cabo%20Verde%20-%20Diagnostic%20Report%20%28Web%29_0.pdf' title='R2R Diagnostic' target='_blank'>here</a>)</li></ul>";
+var countryDM ="<h3>Dominica</h3><ul><li>R2R Diagnostic</li></ul><ul><li>GFDRR Results in Resilience story - <a href='https://www.gfdrr.org/sites/default/files/Caribbean%20RiR%20v3.pdf' title='GFDRR Results in Resilience story - Upgrading Caribbean Disaster Preparedness and Response Capacities' target='_blank'>Upgrading Caribbean Disaster Preparedness and Response Capacities</a></li></ul>";
+var countryFM ="<h3>Federated States of Micronesia</h3><ul><li>Rapid Preparedness Assessment</li></ul>";	
+var countryGD ="<h3>Grenada</h3><ul><li>R2R Diagnostic</li></ul><ul><li>GFDRR Results in Resilience story - <a href='https://www.gfdrr.org/sites/default/files/Caribbean%20RiR%20v3.pdf' title='GFDRR Results in Resilience story - Upgrading Caribbean Disaster Preparedness and Response Capacities' target='_blank'>Upgrading Caribbean Disaster Preparedness and Response Capacities</a></li></ul>";
+var countryGN ="<h3>Guinea</h3><ul><li>Rapid Preparedness Assessment</li></ul>";
+var countryGW ="<h3>Guinea Bissau</h3><ul><li>Rapid Preparedness Assessment</li></ul>";
+var countryHT ="<h3>Haiti</h3><ul><li>Feature Story - <a href='https://www.worldbank.org/en/news/feature/2020/10/12/an-n-prepare-n-pi-plis-toujou-let-us-be-more-and-more-prepared' title='Feature Story - Let us be more and more prepared' target='_blank'>Haiti “Let us be more and more prepared”</a></li></ul><ul><li>GFDRR Results in Resilience story - <a href='https://documents1.worldbank.org/curated/en/099544506222241333/pdf/IDU0c6f39f530780c042070afb208bb3c20e6cd7.pdf' title='GFDRR Results in Resilience story - Enhancing disaster preparedness in Haiti' target='_blank'>Enhancing disaster preparedness in Haiti</a></li></ul>";	
+var countryID ="<h3>Indonesia</h3><ul><li>R2R Diagnostic</li></ul>";
+var countryJO ="<h3>Jordan</h3><ul><li>R2R Diagnostic for the Greater Amman Municipality</li></ul><ul><li>Feature Story - <a href='https://www.gfdrr.org/en/feature-story/sharing-and-mobilizing-knowledge-more-resilient-jordan' title='Feature Story - Sharing and mobilizing knowledge for a more resilient Jordan' target='_blank'>Sharing and mobilizing knowledge for a more resilient Jordan</a></li></ul>";
+var countryKM ="<h3>Comoros</h3><ul><li>R2R Diagnostic</li></ul>";	
+var countryKN ="<h3>Saint Kitts and Nevis</h3><ul><li>R2R Diagnostic</li></ul><ul><li>GFDRR Results in Resilience story - <a href='https://www.gfdrr.org/sites/default/files/Caribbean%20RiR%20v3.pdf' title='GFDRR Results in Resilience story - Upgrading Caribbean Disaster Preparedness and Response Capacities' target='_blank'>Upgrading Caribbean Disaster Preparedness and Response Capacities</a></li></ul>";
+var countryKG ="<h3>Kyrgyz Republic</h3><ul><li>CPGA</li></ul>";
+var countryKH ="<h3>Cambodia</h3><ul><li>R2R Diagnostic</li></ul>";
+var countryLA ="<h3>Lao People's Democratic Republic</h3><ul><li>CPGA</li></ul>";
+var countryLC ="<h3>Saint Lucia</h3><ul><li>R2R Diagnostic</li></ul>";	
+var countryLR ="<h3>Liberia</h3><ul><li>R2R Diagnostic</li></ul>";
+var countryME ="<h3>Western Balkans</h3><ul><li>R2R Diagnostic (published: <a href='https://openknowledge.worldbank.org/server/api/core/bitstreams/6b69dc31-1bf8-5660-bfa9-91d9899a231e/content' title='R2R Diagnostic - Albania' target='_blank'>Albania</a>, <a href='https://openknowledge.worldbank.org/server/api/core/bitstreams/8c55990c-ae52-5013-90b3-57f6742da51e/content' title='R2R Diagnostic - Bosnia and Herzegovina' target='_blank'>Bosnia and Herzegovina</a>, <a href='https://openknowledge.worldbank.org/server/api/core/bitstreams/b4186d4a-21dd-55c8-a064-29193e3db444/content' title='R2R Diagnostic - Kosovo' target='_blank'>Kosovo</a>, <a href='https://openknowledge.worldbank.org/entities/publication/7c87df93-051c-5dfe-856a-30e873fbe0d3' title='R2R Diagnostic - Montenegro' target='_blank'>Montenegro</a>, <a href='https://documents1.worldbank.org/curated/en/099350008252228932/pdf/P16537706f45a60ba0898302ebcf92314b2.pdf' title='R2R Diagnostic - Serbia' target='_blank'>Serbia</a>)</li></ul>";
+var countryMG ="<h3>Madagascar</h3><ul><li>R2R Diagnostic</li></ul>";
+var countryML ="<h3>Mali</h3><ul><li>Rapid Preparedness Assessment</li></ul>";
+var countryMR ="<h3>Mauritania</h3><ul><li>Lessons Learned Exercise</li></ul>";
+var countryMV ="<h3>Maldives</h3><ul><li><a href='https://www.gfdrr.org/sites/default/files/2025-09/Maldives-CPGA-Briefing-Note.pdf' title='CPGA' target='_blank'>CPGA</a></li></ul>";
+var countryMW ="<h3>Malawi</h3><ul><li>CPGA</li></ul>";	
+var countryNE ="<h3>Niger</h3><ul><li>Rapid Preparedness Assessment</li></ul>";
+var countryNG ="<h3>Nigeria</h3><ul><li>Lessons Learned Exercise</li></ul><ul><li>R2R Diagnostic</li></ul><ul><li>CPGA</li></ul>";
+var countryNP ="<h3>Nepal</h3><ul><li><a href='https://www.gfdrr.org/sites/default/files/2025-09/Nepal-CPGA-Briefing-Note.pdf' title='CPGA' target='_blank'>CPGA</a></li></ul>";
+var countryPH ="<h3>Philippines</h3><ul><li>R2R Diagnostic</li></ul><ul><li>Blog - <a href='https://blogs.worldbank.org/en/eastasiapacific/philippines-ready-rebuild-aftermath-typhoon-rai' title='Blog - The Philippines is “Ready to Rebuild” in the aftermath of Typhoon Rai' target='_blank'>The Philippines is “Ready to Rebuild” in the aftermath of Typhoon Rai</a></li></ul>";
+var countryPK ="<h3>Pakistan</h3><ul><li><a href='https://www.gfdrr.org/sites/default/files/2025-09/Pakistan-CPGA-Briefing-Note.pdf' title='CPGA' target='_blank'>CPGA</a></li></ul>";
+var countryRO ="<h3>Romania</h3><ul><li>Feature story - <a href='https://www.gfdrr.org/en/feature-story/enabling-inclusive-emergency-preparedness-and-response-romania' title='Feature story - Enabling Inclusive Emergency Preparedness and Response in Romania' target='_blank'>Enabling Inclusive Emergency Preparedness and Response in Romania</a></li></ul>";
+var countrySC ="<h3>Seychelles</h3><ul><li>R2R Diagnostic</li></ul>";
+var countrySL ="<h3>Sierra Leone</h3><ul><li>R2R Diagnostic</li></ul>";
+var countrySO ="<h3>Somalia</h3><ul><li>R2R Diagnostic</li></ul>";
+var countrySR ="<h3>Suriname</h3><ul><li>R2R Diagnostic</li></ul>";
+var countrySS ="<h3>South Sudan</h3><ul><li>R2R Diagnostic</li></ul>";
+var countryTD ="<h3>Chad</h3><ul><li>R2R Diagnostic</li></ul>";	
+var countryTJ ="<h3>Tajikistan</h3><ul><li>R2R Diagnostic</li></ul><ul><li><a href='https://www.gfdrr.org/sites/default/files/2025-09/Tajikistan-CPGA-Briefing-Note.pdf' title='CPGA' target='_blank'>CPGA</a></li></ul>";
+var countryTV ="<h3>Tuvalu</h3><ul><li>R2R Diagnostic</li></ul>";	
+var countryTZ ="<h3>Tanzania</h3><ul><li>Lessons Learned Exercise - <a href='https://www.gfdrr.org/en/feature-story/learning-resilience-bolstering-emergency-preparedness-and-response-tanzania' title='Lessons Learned Exercise - Feature Story' target='_blank'>Feature Story</a></li></ul>";	
+var countryUG ="<h3>Uganda</h3><ul><li><a href='https://www.gfdrr.org/sites/default/files/2025-09/Uganda-CPGA-Briefing-Note.pdf' title='CPGA' target='_blank'>CPGA</a></li></ul>";
+var countryVC ="<h3>Saint Vincent and the Grenadines</h3><ul><li>R2R Diagnostic</li></ul><ul><li>Blog - <a href='https://blogs.worldbank.org/en/latinamerica/critical-role-emergency-operations-centers-saving-lives-when-disasters-strike?cid=SHR_BlogSiteEmail_EN_EXT' title='Blog - Saint Vincent and the Grenadines: The critical role of emergency operations centers in saving lives when disasters strike' target='_blank'>Saint Vincent and the Grenadines: The critical role of emergency operations centers in saving lives when disasters strike</a></li></ul><ul><li>Video - <a href='https://www.youtube.com/watch?v=hu2PkyWrULk' title='Video - Recognizing the need to develop a strong shelter management framework: Interview with Ms. Michelle Forbes, Director of National Emergency Management Organization in St. Vincent and the Grenadines' target='_blank'>Recognizing the need to develop a strong shelter management framework</a>: Interview with Ms. Michelle Forbes, Director of National Emergency Management Organization in St. Vincent and the Grenadines</li></ul><ul><li>Video - <a href='https://www.youtube.com/watch?v=FNY226Jwslw' title='Video - Supporting EP&R efforts in Saint Vincent and the Grenadines following the 2021 La Soufriere volcanic eruption' target='_blank'>Supporting EP&R efforts in Saint Vincent and the Grenadines</a> following the 2021 La Soufriere volcanic eruption</li></ul><ul><li>GFDRR Results in Resilience story - <a href='https://documents1.worldbank.org/curated/en/099556506222289059/pdf/IDU0c35ca1ec0a648040f70be8706e57e64656d9.pdf' title='GFDRR Results in Resilience story - Saint Vincent and the Grenadines – Supporting Recovery and Resilience' target='_blank'>Saint Vincent and the Grenadines – Supporting Recovery and Resilience</a></li></ul><ul><li>GFDRR Results in Resilience story  - <a href='https://www.gfdrr.org/sites/default/files/Caribbean%20RiR%20v3.pdf' title='GFDRR Results in Resilience story - Upgrading Caribbean Disaster Preparedness and Response Capacities' target='_blank'>Upgrading Caribbean Disaster Preparedness and Response Capacities</a></li></ul>";	
+var countryVN ="<h3>Vietnam</h3><ul><li>Lessons Learned Exercise</li></ul>";
+var countryZA ="<h3>South Africa</h3><ul><li>Lessons Learned Exercise for Ethekwini Metropolitan Municipality</li></ul>";
+var countryZM ="<h3>Zambia</h3><ul><li>R2R Diagnostic</li></ul>";	
+
+var margin = {top: 10, right: 10, bottom: 10, left: 10};
+var width = 1200 - margin.left - margin.right;
+var height = 620 - margin.top - margin.bottom;
+
+
+var projection = d3.geoNaturalEarth1()
+					.center([-10,25]) 
+					.rotate([-9,0])
+					.scale([1500/(2*Math.PI)]);
+            //       .translate([450,300]);
+var path = d3.geoPath()
+             .projection(projection);
+	
+	
+var svg = d3.select(".wb-5w-emergency-map-container")
+	.append("svg")
+	.attr("id","wb-5w-emergency-map")
+	.attr("viewBox","0 0 "+width+" "+height)
+	.attr("preserveAspectRatio","xMinYMin meet");
+
+svg.append("rect")
+    .attr("class", "wb-5w-emergency-background")
+    .attr("width", width)
+    .attr("height", height)
+    .on("click", reset);
+
+
+var tooltip = d3.select("div.wb-5w-emergency-tooltip");
+d3.queue()
+	.defer(d3.json, "data/wb-5w-emergency-worldmap.json")
+	.defer(d3.csv, "data/wb-5w-emergency-world-country-names.csv")
+	.await(ready);
+function ready(error, world, names) {
+	if (error) throw error;
+	var countries1 = topojson.feature(world, world.objects.CNTR_RG_10M_2020_4326).features;
+    countries = countries1.filter(function(d) {
+    return names.some(function(n) {
+      if (d.id == n.alpha) return d.name = n.name;
+    })});
+	svg.append("rect")
+		.attr("width",100)
+		.attr("height",60)
+		.attr("x",720)
+		.attr("y",190)
+		.attr("fill","#4E6EB4");
+	svg.selectAll("path")
+			.data(countries)
+			.enter()
+			.append("path")
+			.attr("stroke","white")
+			.attr("stroke-width",0.75)
+			.attr("data-country", function(d,i){return d.id;})
+            .attr("fill", "#E0EAF1")
+			.attr("d", path )
+			.on("click", reset);
+
+		//	.on("mouseover",function(d,i){
+			//	if(d.id=="AL"||d.id=="BA"||d.id=="BD"||d.id=="MR"){	
+         //       	d3.select(this).attr("stroke","#000").attr("stroke-width",1.5);
+             //   	return tooltip.style("wb-5w-emergency-hidden", false).html(countryCV);
+			//	}
+     //       })
+     //       .on("mousemove",function(d){
+			//	if(d.id=="AL"||d.id=="BA"||d.id=="BD"||d.id=="MR"){	
+		//			tooltip
+				//		.classed("wb-5w-emergency-hidden", false)
+               //        .style("top", (d3.event.pageY) + "px")
+               //        .style("left", (d3.event.pageX + 10) + "px")
+             //          .style("top", (path.centroid(d)[1]+30) + "px")
+              //         .style("left", (path.centroid(d)[0]-90) + "px");
+	  			//	$(this).parent().append(this);
+		//			$("path[data-country='AL']").parent().append($("path[data-country='AL']"));
+		//			$("path[data-country='BA']").parent().append($("path[data-country='BA']"));
+		//			$("path[data-country='BD']").parent().append($("path[data-country='BD']"));
+		//			$("path[data-country='JO']").parent().append($("path[data-country='JO']"));
+		//			$("path[data-country='KH']").parent().append($("path[data-country='KH']"));
+		//			$("path[data-country='LR']").parent().append($("path[data-country='LR']"));
+		//			$("path[data-country='ME']").parent().append($("path[data-country='ME']"));
+		//			$("path[data-country='MG']").parent().append($("path[data-country='MG']"));
+		//			$("path[data-country='MR']").parent().append($("path[data-country='MR']"));
+		//			$("path[data-country='NG']").parent().append($("path[data-country='NG']"));
+		//			$("path[data-country='PH']").parent().append($("path[data-country='PH']"));
+		//			$("path[data-country='RO']").parent().append($("path[data-country='RO']"));
+		//			$("path[data-country='RS']").parent().append($("path[data-country='RS']"));
+		//			$("path[data-country='SL']").parent().append($("path[data-country='SL']"));
+		//			$("path[data-country='SO']").parent().append($("path[data-country='SO']"));
+		//			$("path[data-country='SR']").parent().append($("path[data-country='SR']"));
+		//			$("path[data-country='TJ']").parent().append($("path[data-country='TJ']"));
+		//			$("path[data-country='TZ']").parent().append($("path[data-country='TZ']"));
+		//			$("path[data-country='VN']").parent().append($("path[data-country='VN']"));
+		//			$("path[data-country='ZA']").parent().append($("path[data-country='ZA']"));
+			//	}
+        //    })
+       //     .on("mouseout",function(d,i){
+			//	if(d.id=="AL"||d.id=="BA"||d.id=="BD"||d.id=="MR"){								
+      //          	d3.select(this).attr("stroke","#FFF").attr("stroke-width",0.75);
+       //         	tooltip.classed("wb-5w-emergency-hidden", true);
+			//	}
+      //      });
+	
+//	$("path[data-country='AL']").parent().append($("path[data-country='AL']"));
+//	$("path[data-country='BA']").parent().append($("path[data-country='BA']"));
+//	$("path[data-country='BD']").parent().append($("path[data-country='BD']"));
+//	$("path[data-country='JO']").parent().append($("path[data-country='JO']"));
+//	$("path[data-country='KH']").parent().append($("path[data-country='KH']"));
+//	$("path[data-country='LR']").parent().append($("path[data-country='LR']"));
+//	$("path[data-country='ME']").parent().append($("path[data-country='ME']"));
+//	$("path[data-country='MG']").parent().append($("path[data-country='MG']"));
+//	$("path[data-country='MR']").parent().append($("path[data-country='MR']"));
+//	$("path[data-country='NG']").parent().append($("path[data-country='NG']"));
+//	$("path[data-country='PH']").parent().append($("path[data-country='PH']"));
+//	$("path[data-country='RO']").parent().append($("path[data-country='RO']"));
+//	$("path[data-country='RS']").parent().append($("path[data-country='RS']"));
+//	$("path[data-country='SL']").parent().append($("path[data-country='SL']"));
+//	$("path[data-country='SO']").parent().append($("path[data-country='SO']"));
+//	$("path[data-country='SR']").parent().append($("path[data-country='SR']"));
+//	$("path[data-country='TJ']").parent().append($("path[data-country='TJ']"));
+//	$("path[data-country='TZ']").parent().append($("path[data-country='TZ']"));
+//	$("path[data-country='VN']").parent().append($("path[data-country='VN']"));
+//	$("path[data-country='ZA']").parent().append($("path[data-country='ZA']"));
+	
+	var circles = d3.select("#wb-5w-emergency-map")
+		.append("g")
+		.attr("class","wb-5w-emergency-map-circles");
+
+	var tooltips = d3.select("#wb-5w-emergency-map")
+		.append("g")
+		.attr("class","wb-5w-emergency-map-tooltips");	
+	
+	circles.selectAll("circle")
+		.data(countries)
+		.enter()
+		.append("circle")
+		.attr("class","wb-5w-emergency-map-circle")
+		.attr("transform", function(d) { return "translate(" + path.centroid(d) + ")"; })
+		.attr("r", function(d){
+			if(d.id=="AG"||d.id=="DZ"||d.id=="DM"||d.id=="GD"||d.id=="GW"||d.id=="KN"||d.id=="LC"||d.id=="VC"){	
+				return 4;
+			} else if(d.id=="BF"||d.id=="BT"||d.id=="BZ"||d.id=="CG"||d.id=="CM"||d.id=="CV"||d.id=="GN"||d.id=="HT"||d.id=="JO"||d.id=="KM"||d.id=="LR"||d.id=="MV"||d.id=="MW"||d.id=="RO"||d.id=="SC"||d.id=="SL"||d.id=="SR"||d.id=="TV"){	
+				return 7;
+			} else if(d.id=="BD"||d.id=="CD"||d.id=="CF"||d.id=="KG"||d.id=="KH"||d.id=="LA"||d.id=="ME"||d.id=="ML"||d.id=="MR"||d.id=="NE"||d.id=="NG"||d.id=="NP"||d.id=="SO"||d.id=="SS"||d.id=="TD"||d.id=="TJ"||d.id=="TZ"||d.id=="UG"||d.id=="VN"||d.id=="ZM"){	
+				return 14;
+			} else if(d.id=="AO"||d.id=="FM"||d.id=="ID"||d.id=="MG"||d.id=="PK"||d.id=="PH"||d.id=="ZA"){	
+				return 30;
+			}		
+		})
+		.attr("stroke","#000")
+		.attr("stroke-width",2)
+		.attr("fill","transparent")
+	//	.attr("opacity",0.1)
+		.attr("data-country", function(d,i){return d.id;})
+		.on("click",function(d,i){
+			if(d.id=="AG"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+60 + "px")
+                    .style("left", (path.centroid(d)[0]-115) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-afr");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eap");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-lac");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryAG);
+			} else if(d.id=="AO"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+80 + "px")
+                    .style("left", (path.centroid(d)[0]-105) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eap");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-lac");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-afr");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryAO);
+			} else if(d.id=="BD"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+70 + "px")
+                    .style("left", (path.centroid(d)[0]-115) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-afr");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eap");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-lac");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-sar");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryBD);
+			} else if(d.id=="BF"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+60 + "px")
+                    .style("left", (path.centroid(d)[0]-105) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eap");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-lac");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-afr");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryBF);
+			} else if(d.id=="BT"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+60 + "px")
+                    .style("left", (path.centroid(d)[0]-105) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-afr");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eap");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-lac");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-sar");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryBT);
+			} else if(d.id=="BZ"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+60 + "px")
+                    .style("left", (path.centroid(d)[0]-105) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-afr");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eap");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-lac");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryBZ);
+			} else if(d.id=="CD"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+60 + "px")
+                    .style("left", (path.centroid(d)[0]-105) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eap");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-lac");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-afr");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryCD);
+			} else if(d.id=="CF"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+65 + "px")
+                    .style("left", (path.centroid(d)[0]-105) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eap");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-lac");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-afr");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryCF);
+			} else if(d.id=="CG"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+60 + "px")
+                    .style("left", (path.centroid(d)[0]-105) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eap");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-lac");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-afr");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryCG);
+			} else if(d.id=="CM"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+60 + "px")
+                    .style("left", (path.centroid(d)[0]-105) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eap");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-lac");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-afr");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryCM);
+			} else if(d.id=="CV"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+60 + "px")
+                    .style("left", (path.centroid(d)[0]-105) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eap");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-lac");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-afr");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryCV);
+			} else if(d.id=="DM"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+60 + "px")
+                    .style("left", (path.centroid(d)[0]-105) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-afr");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eap");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-lac");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryDM);
+			} else if(d.id=="FM"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+80 + "px")
+                    .style("left", (path.centroid(d)[0]-125) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-afr");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-lac");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-eap");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryFM);
+			} else if(d.id=="GD"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+60 + "px")
+                    .style("left", (path.centroid(d)[0]-105) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-afr");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eap");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-lac");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryGD);
+			} else if(d.id=="GN"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+55 + "px")
+                    .style("left", (path.centroid(d)[0]-105) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eap");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-lac");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-afr");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryGN);
+			} else if(d.id=="GW"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+55 + "px")
+                    .style("left", (path.centroid(d)[0]-105) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eap");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-lac");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-afr");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryGW);
+			} else if(d.id=="HT"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+60 + "px")
+                    .style("left", (path.centroid(d)[0]-105) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-afr");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eap");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-lac");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryHT);
+			} else if(d.id=="ID"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+80 + "px")
+                    .style("left", (path.centroid(d)[0]-125) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-afr");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-lac");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-eap");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryID);
+			} else if(d.id=="JO"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+60 + "px")
+                    .style("left", (path.centroid(d)[0]-105) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-afr");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eap");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-lac");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-mena");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryJO);
+			} else if(d.id=="KG"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+80 + "px")
+                    .style("left", (path.centroid(d)[0]-125) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-afr");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eap");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-lac");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-eca");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryKG);
+			} else if(d.id=="KM"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+55 + "px")
+                    .style("left", (path.centroid(d)[0]-105) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eap");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-lac");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-afr");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryKM);
+			} else if(d.id=="KN"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+60 + "px")
+                    .style("left", (path.centroid(d)[0]-105) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-afr");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eap");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-lac");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryKN);
+			} else if(d.id=="KH"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+70 + "px")
+                    .style("left", (path.centroid(d)[0]-125) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-afr");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-lac");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-eap");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryKH);
+			} else if(d.id=="LA"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+70 + "px")
+                    .style("left", (path.centroid(d)[0]-125) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-afr");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-lac");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-eap");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryLA);
+			} else if(d.id=="LC"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+60 + "px")
+                    .style("left", (path.centroid(d)[0]-105) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-afr");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eap");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-lac");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryLC);
+			} else if(d.id=="LR"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+60 + "px")
+                    .style("left", (path.centroid(d)[0]-105) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eap");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-lac");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-afr");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryLR);
+			} else if(d.id=="ME"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+70 + "px")
+                    .style("left", (path.centroid(d)[0]-105) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-afr");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eap");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-lac");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-eca");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryME);
+			} else if(d.id=="MG"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+80 + "px")
+                    .style("left", (path.centroid(d)[0]-105) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eap");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-lac");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-afr");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryMG);
+			} else if(d.id=="ML"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+70 + "px")
+                    .style("left", (path.centroid(d)[0]-105) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eap");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-lac");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-afr");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryML);
+			} else if(d.id=="MR"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+70 + "px")
+                    .style("left", (path.centroid(d)[0]-105) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eap");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-lac");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-afr");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryMR);
+			} else if(d.id=="MV"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+60 + "px")
+                    .style("left", (path.centroid(d)[0]-105) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-afr");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eap");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-lac");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-sar");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryMV);
+			} else if(d.id=="MW"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+60 + "px")
+                    .style("left", (path.centroid(d)[0]-105) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eap");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-lac");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-afr");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryMW);
+			} else if(d.id=="NE"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+70 + "px")
+                    .style("left", (path.centroid(d)[0]-105) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eap");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-lac");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-afr");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryNE);
+			} else if(d.id=="NG"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+70 + "px")
+                    .style("left", (path.centroid(d)[0]-105) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eap");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-lac");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-afr");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryNG);
+			} else if(d.id=="NP"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+80 + "px")
+                    .style("left", (path.centroid(d)[0]-105) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-afr");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eap");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-lac");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-sar");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryNP);
+			} else if(d.id=="PH"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+80 + "px")
+                    .style("left", (path.centroid(d)[0]-125) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-afr");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-lac");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-eap");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryPH);
+			} else if(d.id=="PK"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+85 + "px")
+                    .style("left", (path.centroid(d)[0]-125) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-afr");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eap");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-lac");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-sar");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryPK);
+			} else if(d.id=="RO"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+65 + "px")
+                    .style("left", (path.centroid(d)[0]-105) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-afr");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eap");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-lac");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-eca");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryRO);
+			} else if(d.id=="SC"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+55 + "px")
+                    .style("left", (path.centroid(d)[0]-105) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eap");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-lac");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-afr");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countrySC);
+			} else if(d.id=="SL"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+60 + "px")
+                    .style("left", (path.centroid(d)[0]-105) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eap");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-lac");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-afr");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countrySL);
+			} else if(d.id=="SO"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+65 + "px")
+                    .style("left", (path.centroid(d)[0]-105) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eap");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-lac");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-afr");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countrySO);
+			} else if(d.id=="SR"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+60 + "px")
+                    .style("left", (path.centroid(d)[0]-105) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-afr");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eap");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-lac");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countrySR);
+			} else if(d.id=="SS"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+65 + "px")
+                    .style("left", (path.centroid(d)[0]-105) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eap");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-lac");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-afr");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countrySS);
+			} else if(d.id=="TD"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+65 + "px")
+                    .style("left", (path.centroid(d)[0]-105) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eap");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-lac");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-afr");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryTD);
+			} else if(d.id=="TJ"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+70 + "px")
+                    .style("left", (path.centroid(d)[0]-105) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-afr");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eap");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-lac");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-eca");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryTJ);
+			} else if(d.id=="TV"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+60 + "px")
+                    .style("left", (path.centroid(d)[0]-230) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-afr");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-lac");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-eap");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryTV);
+			} else if(d.id=="TZ"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+60 + "px")
+                    .style("left", (path.centroid(d)[0]-105) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eap");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-lac");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-afr");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryTZ);
+			} else if(d.id=="UG"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+60 + "px")
+                    .style("left", (path.centroid(d)[0]-105) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eap");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-lac");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-afr");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryUG);
+			} else if(d.id=="VC"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+60 + "px")
+                    .style("left", (path.centroid(d)[0]-200) + "px")
+					.style("width","800px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-afr");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eap");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-lac");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryVC);
+			} else if(d.id=="VN"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+70 + "px")
+                    .style("left", (path.centroid(d)[0]-125) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-afr");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-lac");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-eap");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryVN);
+			} else if(d.id=="ZA"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+80 + "px")
+                    .style("left", (path.centroid(d)[0]-105) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eap");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-lac");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-afr");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryZA);
+			} else if(d.id=="ZM"){
+				tooltip
+					.classed("wb-5w-emergency-hidden", false)
+                    .style("top", (path.centroid(d)[1])+60 + "px")
+                    .style("left", (path.centroid(d)[0]-105) + "px")
+					.style("width","210px");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eap");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-eca");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-lac");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-mena");
+				$(".wb-5w-emergency-tooltip").removeClass("wb-5w-emergency-tooltip-sar");
+				$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-tooltip-afr");
+				return tooltip.style("wb-5w-emergency-hidden", false).html(countryZM);
+			}
+        })
+		.on("mouseover",function(d,i){
+			d3.select(this).attr("stroke-width",3);
+		//	return tooltip.style("wb-5w-emergency-hidden", false).html(country+d.id);
+        })
+	//	.on("mousemove",function(d){
+	//				tooltip
+				//		.classed("wb-5w-emergency-hidden", false)
+               //        .style("top", (d3.event.pageY) + "px")
+               //        .style("left", (d3.event.pageX + 10) + "px")
+     //                  .style("top", (path.centroid(d)[1]+15) + "px")
+     //                  .style("left", (path.centroid(d)[0]-90) + "px");
+               //        .html(countryCV);
+	 // 		$(this).parent().append(this);
+    //    })
+       .on("mouseout",function(d,i){
+           	d3.select(this).attr("stroke-width",2);
+   //       tooltip.classed("wb-5w-emergency-hidden", true);
+        });
+//	tooltips.selectAll("rect")
+//		.data(countries)
+//		.enter()
+//		.append("rect")
+//		.attr("width",180)
+//		.attr("height",120)
+//		.attr("class",function(d,i){return "wb-5w-emergency-map-tooltip wb-5w-emergency-map-tooltip-"+d.id})
+//		.attr("transform", function(d) { return "translate(" + (path.centroid(d)[0]-90) + " " + (path.centroid(d)[1]+10) + ")"; })
+//		.attr("stroke","#000")
+//		.attr("stroke-width",1)
+//		.attr("fill","#FFF")
+//		.append("text")
+//		.text("Click here");
+
+
+	
+};
+	function reset() {
+		$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-hidden");
+    }
+//	$(window).click(function(){
+//		$(".wb-5w-emergency-tooltip").addClass("wb-5w-emergency-hidden");
+//	});
+//	$(window).click(reset);
+//	$(".wb-5w-emergency-tooltip").click(function(event){
+//		event.stopPropagation();
+//	});
+
+</script>
+</body>
+</html>
